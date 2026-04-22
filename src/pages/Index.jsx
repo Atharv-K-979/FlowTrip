@@ -172,7 +172,7 @@ function FlowBot({ onPlanClick }) {
         },
         body: JSON.stringify({
           systemInstruction: {
-            parts: [{ text: "You are FlowBot, FlowTrip's India smart mobility assistant. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical." }]
+            parts: [{ text: "You are FlowBot, FlowTrip's India smart mobility assistant. Always greet users with 'Hola !!' instead of 'Namaste'. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical." }]
           },
           contents: nextMessages.slice(-8).map(m => ({
             role: m.role === "assistant" ? "model" : "user",
@@ -217,17 +217,17 @@ function FlowBot({ onPlanClick }) {
             <div className="flex w-24 items-center justify-center bg-[#ffe01b] border-r-[3px] border-black text-black">
               <Sparkles className="size-10" />
             </div>
-            <div className="flex flex-1 items-center justify-between p-5 text-white">
+            <div className="flex flex-1 items-center justify-between p-3 text-white md:p-5">
               <div>
-                <div className="font-display text-2xl font-black tracking-wide">FlowBot</div>
-                <div className="font-display text-[0.65rem] font-bold uppercase tracking-[0.3em] text-zinc-400">India mobility AI</div>
+                <div className="font-display text-xl font-black tracking-wide md:text-2xl">FlowBot</div>
+                <div className="font-display text-[0.6rem] font-bold uppercase tracking-[0.3em] text-zinc-400 md:text-[0.65rem]">India mobility AI</div>
               </div>
-              <button onClick={() => setOpen(false)} className="grid size-12 place-items-center border border-zinc-700 transition-colors hover:bg-zinc-800">
-                <X className="size-6" />
+              <button onClick={() => setOpen(false)} className="grid size-10 place-items-center border border-zinc-700 transition-colors hover:bg-zinc-800 md:size-12">
+                <X className="size-5 md:size-6" />
               </button>
             </div>
           </div>
-          <div className="h-[400px] space-y-5 overflow-y-auto p-6">
+          <div className="h-[280px] space-y-5 overflow-y-auto p-4 md:h-[400px] md:p-6">
             {messages.map((message, index) => (
               <div 
                 key={`${message.role}-${index}`} 
@@ -242,25 +242,25 @@ function FlowBot({ onPlanClick }) {
               </div>
             )}
           </div>
-          <div className="border-t-[3px] border-black bg-white p-6">
-            <div className="mb-5 flex flex-wrap gap-2">
+          <div className="border-t-[3px] border-black bg-white p-4 md:p-6">
+            <div className="mb-4 flex flex-wrap gap-2 md:mb-5">
               {["Cheapest route?", "Sangli to Mumbai", "Low CO₂"].map((item) => (
                 <button 
                   key={item} 
                   onClick={() => setInput(item)} 
-                  className="border-[2px] border-black bg-white px-4 py-2 font-display text-[0.65rem] font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-zinc-100"
+                  className="border-[2px] border-black bg-white px-3 py-1.5 font-display text-[0.6rem] font-bold uppercase tracking-[0.18em] text-black transition-colors hover:bg-zinc-100 md:px-4 md:py-2 md:text-[0.65rem]"
                 >
                   {item}
                 </button>
               ))}
             </div>
-            <div className="flex items-stretch gap-3">
+            <div className="flex items-stretch gap-2 md:gap-3">
               <input 
                 value={input} 
                 onChange={(event) => setInput(event.target.value)} 
                 onKeyDown={(event) => event.key === "Enter" && sendMessage()} 
                 placeholder="Ask FlowBot…" 
-                className="min-w-0 flex-1 border-[3px] border-black bg-[#f4f5f5] px-5 py-4 text-base font-bold text-black outline-none placeholder:text-zinc-500 focus:bg-white" 
+                className="min-w-0 flex-1 border-[3px] border-black bg-[#f4f5f5] px-4 py-3 text-base font-bold text-black outline-none placeholder:text-zinc-500 focus:bg-white md:px-5 md:py-4" 
               />
               <button 
                 onClick={sendMessage} 
