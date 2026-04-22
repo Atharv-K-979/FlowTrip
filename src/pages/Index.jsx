@@ -486,7 +486,7 @@ const Index = () => {
               </a>
             ))}
           </div>
-          <div className="flex items-center gap-2">
+          <div className="hidden items-center gap-2 md:flex">
             <Button variant="flowOutline" size="sm" onClick={() => plannerRef.current?.scrollIntoView({ behavior: "smooth" })}>
               <MessageCircle /> Ask FlowBot
             </Button>
@@ -532,7 +532,7 @@ const Index = () => {
 
         <motion.div initial={{ opacity: 0, scale: 0.95, rotate: -2 }} animate={{ opacity: 1, scale: 1, rotate: 0 }} transition={{ duration: 0.8, type: "spring" }} className="relative z-10 flex items-center">
           <div className="flow-panel overflow-hidden border-[4px] border-black shadow-[12px_12px_0_0_#000] bg-white w-full">
-            <div className="relative aspect-[0.85] min-h-[520px]">
+            <div className="relative aspect-[0.85] min-h-[400px] md:min-h-[520px]">
               <img src={trainImage} alt="Mumbai local train passing through dense Indian city housing" className="h-full w-full object-cover" width={1280} height={900} />
               
               <div className="absolute right-6 top-6 bg-[#ffe01b] border-[3px] border-black px-4 py-2 font-display text-xs font-black uppercase tracking-[0.32em] text-black shadow-[4px_4px_0_0_#000]">
@@ -602,7 +602,7 @@ const Index = () => {
           <span className="font-display text-xs font-bold uppercase tracking-[0.5em] text-black/70">[ 02 / Solution ]</span>
           <h2 className="mt-5 font-display text-4xl font-black text-black md:text-5xl">One interface for every way the <span className="text-[#0033cc] bg-white px-2 border-2 border-black">city moves.</span></h2>
           <p className="mt-5 max-w-5xl text-lg leading-8 text-black/80 font-medium">FlowTrip stitches BMTC, BEST, DMRC, MSRTC, IRCTC, Mumbai locals, autos, and on-demand cabs into a single planning fabric.</p>
-          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={{ show: { transition: { staggerChildren: 0.05 } } }} className="mt-12 grid gap-4 md:grid-cols-3 lg:grid-cols-6">
+          <motion.div initial="hidden" whileInView="show" viewport={{ once: true }} variants={{ show: { transition: { staggerChildren: 0.05 } } }} className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
             {[
               [LocateFixed, "Walk", "Integrated", "bg-walk"],
               [Bus, "Bus", "Integrated", "bg-bus"],
@@ -680,7 +680,7 @@ const Index = () => {
                 ))}
               </div>
             )}
-            <div className="grid gap-3 md:grid-cols-4">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {[
                 [Clock3, "Time", route ? `${Math.round(route.durationMin)} min` : "—"],
                 [IndianRupee, "Cost", route ? `₹${route.cost}` : "—"],
