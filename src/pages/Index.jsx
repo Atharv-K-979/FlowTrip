@@ -161,12 +161,47 @@ function FlowBot({ onPlanClick }) {
     setInput("");
     setLoading(true);
 
-    const { data, error } = await supabase.functions.invoke("flowbot", { body: { messages: nextMessages } });
-    const botReply = data?.reply ? data.reply.replace(/[*#]/g, "").trim() : null;
-    setMessages((current) => [
-      ...current,
-      { role: "assistant", content: error ? "FlowBot is warming up. Please try again later." : botReply ?? "I can help plan your FlowTrip route." },
-    ]);
+    try {
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+      if (!apiKey) throw new Error("VITE_GEMINI_API_KEY is not set in environment variables");
+
+      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          model: "gemini-2.5-flash",
+          messages: [
+            {
+              role: "system",
+              content: "You are FlowBot, FlowTrip's India smart mobility assistant. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical."
+            },
+            ...nextMessages.slice(-8).map(m => ({ role: m.role, content: m.content.slice(0, 1200) }))
+          ]
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      const botReply = data.choices?.[0]?.message?.content?.replace(/[*#]/g, "").trim();
+
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: botReply ?? "I can help plan your FlowTrip route." },
+      ]);
+    } catch (error) {
+      console.error(error);
+      setMessages((current) => [
+        ...current,
+        { role: "assistant", content: "FlowBot is warming up. Please check your API key and try again later." },
+      ]);
+    }
+
     setLoading(false);
   };
 
