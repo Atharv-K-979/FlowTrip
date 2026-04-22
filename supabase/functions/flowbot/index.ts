@@ -8,7 +8,7 @@ const corsHeaders = {
 function cleanMessages(value) {
   if (!Array.isArray(value)) return [];
   return value
-    .filter((message): message is ChatMessage => {
+    .filter((message) => {
       if (!message || typeof message !== "object") return false;
       const item = message;
       return (item.role === "user" || item.role === "assistant") && typeof item.content === "string" && item.content.trim().length > 0;
