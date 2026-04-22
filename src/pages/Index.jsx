@@ -165,12 +165,15 @@ function FlowBot({ onPlanClick }) {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY?.trim();
       if (!apiKey) throw new Error("VITE_GEMINI_API_KEY is not set in environment variables");
 
-      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1/models/gemini-flash-latest:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
+          systemInstruction: {
+            parts: [{ text: "You are FlowBot, FlowTrip's India smart mobility assistant. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical." }]
+          },
           contents: nextMessages.slice(-8).map(m => ({
             role: m.role === "assistant" ? "model" : "user",
             parts: [{ text: m.content.slice(0, 1200) }]
