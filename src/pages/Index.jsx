@@ -165,21 +165,19 @@ function FlowBot({ onPlanClick }) {
       const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
       if (!apiKey) throw new Error("VITE_GEMINI_API_KEY is not set in environment variables");
 
-      const response = await fetch("https://generativelanguage.googleapis.com/v1beta/openai/chat/completions", {
+      const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`, {
         method: "POST",
         headers: {
-          "Authorization": `Bearer ${apiKey}`,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          model: "gemini-2.5-flash",
-          messages: [
-            {
-              role: "system",
-              content: "You are FlowBot, FlowTrip's India smart mobility assistant. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical."
-            },
-            ...nextMessages.slice(-8).map(m => ({ role: m.role, content: m.content.slice(0, 1200) }))
-          ]
+          systemInstruction: {
+            parts: [{ text: "You are FlowBot, FlowTrip's India smart mobility assistant. Help users plan Indian journeys, explain route options, costs, reliability, CO2, buses, trains, autos, walking links, and map behavior. Be concise, friendly, and practical." }]
+          },
+          contents: nextMessages.slice(-8).map(m => ({
+            role: m.role === "assistant" ? "model" : "user",
+            parts: [{ text: m.content.slice(0, 1200) }]
+          }))
         })
       });
 
@@ -188,7 +186,7 @@ function FlowBot({ onPlanClick }) {
       }
 
       const data = await response.json();
-      const botReply = data.choices?.[0]?.message?.content?.replace(/[*#]/g, "").trim();
+      const botReply = data.candidates?.[0]?.content?.parts?.[0]?.text?.replace(/[*#]/g, "").trim();
 
       setMessages((current) => [
         ...current,
