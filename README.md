@@ -22,23 +22,28 @@ Instead of juggling multiple apps for different transport modes, FlowTrip provid
 
 ---
 
+## ✨ Screenshot's
+
 <p align="center">
-  <img src="https://github.com/Atharv-K-979/wlug-mb2/blob/9794c54f29424e8ddb7c07f8faa55a96ab646e22/public/image%20(4).png" alt="Boot Sequence" width="100%" style="border-radius: 10px;" />
+  <img src="public/image(1).png" alt="Boot Sequence" width="100%" style="border-radius: 20px;" />
 </p>
 
 <br />
 
 <!-- <h3 align="center">2. Main Interface</h3> -->
 <p align="center">
-  <img src="https://github.com/Atharv-K-979/wlug-mb2/blob/9794c54f29424e8ddb7c07f8faa55a96ab646e22/public/image%20(3).png" alt="Landing Page" width="100%" style="border-radius: 10px;" />
+  <img src="public/image(2).png" alt="Landing Page" width="100%" style="border-radius: 10px;" />
 </p>
 
 <br />
 
 <!-- <h3 align="center">3. Registration & System Lockdown</h3> -->
 <p align="center">
-  <img src="https://github.com/Atharv-K-979/wlug-mb2/blob/9794c54f29424e8ddb7c07f8faa55a96ab646e22/public/image%20(5).png" alt="Registration Form" width="48%" style="border-radius: 10px; display: inline-block; margin-right: 1%;" />
-  <img src="https://github.com/Atharv-K-979/wlug-mb2/blob/9794c54f29424e8ddb7c07f8faa55a96ab646e22/public/image%20(6).png" alt="Lockdown Mode" width="48%" style="border-radius: 10px; display: inline-block;" />
+  <img src="public/image(3).png" alt="Registration Form" width="80%" style="border-radius: 10px; display: inline-block;" />
+</p>
+
+<p align="center">
+  <img src="public/image(4).png" alt="Lockdown Mode" width="60%" style="border-radius: 10px; display: inline-block;" /> 
 </p>
 
 ---
